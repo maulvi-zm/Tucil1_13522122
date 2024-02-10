@@ -1,19 +1,22 @@
-#include <iostream>
+#include "io.hpp"
 
 using namespace std;
 
-int readFile(string namaFile){
-    FILE *file = fopen("contoh.txt", "r"); // Ganti "contoh.txt" dengan nama file yang ingin Anda baca
+int readFile(const string& namaFile){
+    FILE *file = fopen(namaFile.c_str(), "r"); // Ganti "contoh.txt" dengan nama file yang ingin Anda baca
+
+    printf("Membaca file %s\n", namaFile.c_str());
 
     if (!file) {
-        std::cerr << "Gagal membuka file." << std::endl;
+        cerr << "Gagal membuka file." << endl;
         return 1;
     }
 
-    char line[256];
-    while (fgets(line, sizeof(line), file)) {
-        std::cout << line;
-    }
+    char line[1000];
+
+    int bufferSize = stoi(fgets(line, sizeof(line), file));
+
+    printf("Ukuran buffer: %d\n", bufferSize);
 
     fclose(file);
 
