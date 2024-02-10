@@ -17,6 +17,7 @@ add_executable(BreachProtocolSolver
     ${SRC_DIR}/IO/io.cpp
     ${SRC_DIR}/Data-Structure/data-structure.cpp
     ${SRC_DIR}/Solver/solver.cpp
+    ${SRC_DIR}/Utils/utils.cpp
 )
 
 # Include directories
@@ -24,5 +25,6 @@ target_include_directories(BreachProtocolSolver PUBLIC
     ${SRC_DIR}/IO
     ${SRC_DIR}/Data-Structure
     ${SRC_DIR}/Solver
+    ${SRC_DIR}/Utils
 )
 

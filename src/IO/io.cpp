@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int readFile(const string& namaFile){
-    FILE *file = fopen(namaFile.c_str(), "r"); // Ganti "contoh.txt" dengan nama file yang ingin Anda baca
+int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *matrix, vector<Sequence> *sequences) {
+    FILE *file = fopen(namaFile.c_str(), "r");
 
     printf("Membaca file %s\n", namaFile.c_str());
 
@@ -14,9 +14,52 @@ int readFile(const string& namaFile){
 
     char line[1000];
 
-    int bufferSize = stoi(fgets(line, sizeof(line), file));
+    *bufferSize = stoi(fgets(line, sizeof(line), file));
 
-    printf("Ukuran buffer: %d\n", bufferSize);
+    int row, col;
+    fscanf(file, "%d %d\n", &row, &col);
+    printf("Ukuran baris: %d\n", row);
+    printf("Ukuran kolom: %d\n", col);
+
+    for (int i = 0; i < row; i++) {
+        fgets(line, sizeof(line), file);
+        vector<string> temp = split(line, ' ');
+
+        // printf("Ukuran kolom: %lu \n", temp.size());
+
+        if (temp.size() != col) {
+            
+            cerr << "Ukuran kolom tidak konsisten." << endl;
+            return 1;
+        }
+
+        for (int j = 0; j < col; j++) {
+            if (temp[j].size() != 2) {
+                cerr << "Token harus memiliki panjang 2" << endl;
+                return 1;
+            }
+        }
+
+        matrix->push_back(temp);
+    }
+
+    int banyakSequence = stoi(fgets(line, sizeof(line), file));
+
+    for (int i = 0; i < banyakSequence; i++) {
+
+        vector<string> temp = split(fgets(line, sizeof(line), file), ' ');
+
+        for (int j = 0; j < col; j++) {
+            if (temp[j].size() != 2) {
+                cerr << "Token harus memiliki panjang 2" << endl;
+                return 1;
+            }
+        }
+        
+        int value = stoi(fgets(line, sizeof(line), file));
+
+        sequences->push_back(Sequence(temp, value));
+    }
 
     fclose(file);
 

@@ -201,6 +201,30 @@ Solver/solver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Solver/solver.cpp.s
 .PHONY : Solver/solver.cpp.s
 
+Utils/utils.o: Utils/utils.cpp.o
+.PHONY : Utils/utils.o
+
+# target to build an object file
+Utils/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Utils/utils.cpp.o
+.PHONY : Utils/utils.cpp.o
+
+Utils/utils.i: Utils/utils.cpp.i
+.PHONY : Utils/utils.i
+
+# target to preprocess a source file
+Utils/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Utils/utils.cpp.i
+.PHONY : Utils/utils.cpp.i
+
+Utils/utils.s: Utils/utils.cpp.s
+.PHONY : Utils/utils.s
+
+# target to generate assembly for a file
+Utils/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Utils/utils.cpp.s
+.PHONY : Utils/utils.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -243,6 +267,9 @@ help:
 	@echo "... Solver/solver.o"
 	@echo "... Solver/solver.i"
 	@echo "... Solver/solver.s"
+	@echo "... Utils/utils.o"
+	@echo "... Utils/utils.i"
+	@echo "... Utils/utils.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

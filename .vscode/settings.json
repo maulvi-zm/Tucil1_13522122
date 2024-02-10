@@ -2,6 +2,7 @@
     "files.associations": {
         "tuple": "cpp",
         "set": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iostream": "cpp"
     }
 }
