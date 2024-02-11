@@ -23,6 +23,7 @@ int main(){
         matrix.clear();
         sequences.clear();
         token.clear();
+        solver = BreachProtocolSolver(0, {}, {});
 
         cout << "Masukkan tipe input:" << endl;
         cout << "1. Input dari file" << endl;
@@ -35,7 +36,8 @@ int main(){
         {
         case 1:
             cout << "Masukkan nama file: ";
-            cin >> namaFile;
+            // cin >> namaFile;
+            namaFile = "../test/test-2.txt";
             
             while (readFile(namaFile, &bufferSize, &matrix, &sequences) == 1) {
                 cout << "Masukkan nama file: ";
@@ -44,6 +46,9 @@ int main(){
             solver = BreachProtocolSolver(bufferSize, matrix, sequences);
 
             displayInput(bufferSize, matrix, sequences);
+
+            solver.Solve();
+        
             
             break;
 
@@ -78,8 +83,9 @@ int main(){
 
             makeSequenceFromToken(jumlahSequence, maksPanjangSequence, token, &sequences);
 
-            displayInput(bufferSize, matrix, sequences);
+            solver = BreachProtocolSolver(bufferSize, matrix, sequences);
 
+            displayInput(bufferSize, matrix, sequences);
         
         default:
             cout << "Pilihan tidak valid\n" << endl;
