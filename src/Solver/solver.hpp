@@ -14,25 +14,23 @@ struct Result {
     vector<Point> sequenceResult;
     int score;
     int last;
+    int time;
 };
 
 class BreachProtocolSolver {
 private:
-    int bufferSize,matrixRow, matrixCol;
+    int bufferSize, matrixRow, matrixCol, maxScore, maxSequnceLength = 0;
     vector<vector<string>> matrix;
     vector<Sequence> sequences;
     set<string> startOfSequences;
     vector<Point> sequenceString;
-    vector<vector<Point>> sequenceStringContainer;
     Result result;
-
-    int score[2] = {0, 0};
 
     void HorizontalMove(int bufferPointer);
 
     void VerticalMove(int bufferPointer);
 
-    array<int, 2> CheckScore();
+    array<int, 2> CheckScore(int bufferPointer);
 
     bool CheckPoint(Point point, vector<Point> sequenceString, int bufferPointer);
 
@@ -44,6 +42,10 @@ public:
     void Solve();
 
     void ShowMatrixAndSequence();
+
+    void writeResultToFile(string fileName);
+
+    void showResult();
 };
 
 #endif // BREACH_PROTOCOL_SOLVER_HPP

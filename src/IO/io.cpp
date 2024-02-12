@@ -5,7 +5,7 @@ using namespace std;
 int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *matrix, vector<Sequence> *sequences) {
     FILE *file = fopen(namaFile.c_str(), "r");
 
-    printf("Membaca file %s\n", namaFile.c_str());
+    printf("Membaca file %s\n\n", namaFile.c_str());
 
     if (!file) {
         cerr << "Gagal membuka file." << endl;
@@ -18,8 +18,6 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
 
     int row, col;
     fscanf(file, "%d %d\n", &row, &col);
-    printf("Ukuran baris: %d\n", row);
-    printf("Ukuran kolom: %d\n", col);
 
     for (int i = 0; i < row; i++) {
         fgets(line, sizeof(line), file);

@@ -6,6 +6,11 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
     : bufferSize(bufferSize), matrix(matrix), sequences(sequences) {
     for (int i = 0; i < sequences.size(); i++) {
         startOfSequences.insert(sequences[i].data[0]);
+        maxScore += sequences[i].value;
+
+        if (sequences[i].data.size() > maxSequnceLength) {
+            maxSequnceLength = sequences[i].data.size();
+        }
     }
 
     for (int i = 0; i < bufferSize; i++) {
@@ -19,7 +24,7 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
     matrixRow = matrix.size();
     matrixCol = matrix[0].size();
 
-    result = {{}, 0, -1};
+    result = {{}, 0, -1, 0};
 }
 
 void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
@@ -30,25 +35,26 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
         currentRow = sequenceString[bufferPointer - 1].row;
     }
 
-    if (bufferPointer == bufferSize) {
-        // sequenceStringContainer.push_back(sequenceString);
-        
-        // for (int i = 0; i < sequenceString.size(); i++){
-        //     printf("(%d %d) ", sequenceString[i].row, sequenceString[i].col);
-        // }
-        // cout << endl;
+    if (bufferPointer <= bufferSize) {
+        int tempPointer;
 
-        array<int, 2> temp = CheckScore();
+        if (bufferPointer < bufferSize) {
+            tempPointer = bufferPointer;
+        } else if (bufferPointer >= bufferSize){
+            tempPointer = bufferSize - 1;
+        }
 
-        // cout << temp[0] << temp[1] << endl;
+        array<int, 2> temp = CheckScore(tempPointer);
 
-        if (temp[0] > result.score || (temp[0] == result.score && temp[1] < result.last)){
+        if (temp[0] >= result.score || (temp[0] == result.score && (temp[1] < result.last || result.last == -1))){
             result.sequenceResult = sequenceString;
             result.score = temp[0];
             result.last = temp[1];
         }
-
-        return;
+        
+        if (bufferPointer >= bufferSize || temp[0] == maxScore || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+            return;
+        }
     } 
 
     for (int i = 0; i < matrixCol; i++) {
@@ -74,25 +80,26 @@ void BreachProtocolSolver::VerticalMove(int bufferPointer) {
         currentCol = sequenceString[bufferPointer - 1].col;
     }
 
-    if (bufferPointer == bufferSize) {
-        // sequenceStringContainer.push_back(sequenceString);
+    if (bufferPointer <= bufferSize) {
+        int tempPointer;
 
-        // for (int i = 0; i < sequenceString.size(); i++){
-        //     printf("(%d %d) ", sequenceString[i].row, sequenceString[i].col);
-        // }
-        // cout << endl;
+        if (bufferPointer < bufferSize) {
+            tempPointer = bufferPointer;
+        } else if (bufferPointer >= bufferSize){
+            tempPointer = bufferSize - 1;
+        }
 
-        array<int, 2> temp = CheckScore();
+        array<int, 2> temp = CheckScore(tempPointer);
 
-        // cout << temp[0] << temp[1] << endl;
-
-        if (temp[0] > result.score || (temp[0] == result.score && temp[1] < result.last)){
+        if (temp[0] >= result.score || (temp[0] == result.score && (temp[1] < result.last || result.last == -1))){
             result.sequenceResult = sequenceString;
             result.score = temp[0];
             result.last = temp[1];
         }
-
-        return;
+        
+        if (bufferPointer >= bufferSize || temp[0] == maxScore || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+            return;
+        }
     } 
 
     for (int i = 0; i < matrixRow; i++) {
@@ -121,25 +128,9 @@ void BreachProtocolSolver::Solve() {
     
     auto processingTime = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
 
-    // for (int i = 0; i < sequenceStringContainer.size(); i++){
-    //     for (int j = 0; j < sequenceStringContainer[i].size(); j++){
-    //         printf("(%d %d)", sequenceStringContainer[i][j].row, sequenceStringContainer[i][j].col);
-    //     }
-    //     printf("\n");
+    result.time = processingTime.count();
 
-    // }
-
-    printf("\nScore: %d\n", result.score);
-
-    for(int i = 0; i <= result.last; i++){
-        printf("(%d %d)", result.sequenceResult[i].row, result.sequenceResult[i].col);
-    }
-
-    printf("\nProcessing time");
-    cout << processingTime.count() << endl;
-    
-    cout << endl;
-    
+    showResult();
 }
 
 void BreachProtocolSolver::ShowMatrixAndSequence() {
@@ -177,17 +168,17 @@ bool BreachProtocolSolver::CheckStartOfSequence(Point point) {
     return false;
 }
 
-array<int, 2> BreachProtocolSolver::CheckScore() {
+array<int, 2> BreachProtocolSolver::CheckScore(int bufferPointer) {
     array<int, 2> scoreAndLastPointer = {0, -1};
 
     for (int i = 0; i < sequences.size(); i++) {
-        if (sequences[i].data.size() > bufferSize) {
+        if (sequences[i].data.size() > bufferPointer + 1) {
             continue;
         }
 
         bool isMatch;
         int LastPointer;
-        for (int j = 0; j <= bufferSize - sequences[i].data.size(); j++) {
+        for (int j = 0; j <= bufferPointer + 1 - sequences[i].data.size(); j++) {
 
             isMatch = true;
             
@@ -215,4 +206,73 @@ array<int, 2> BreachProtocolSolver::CheckScore() {
     }
 
     return scoreAndLastPointer;
+}
+
+void BreachProtocolSolver::writeResultToFile(string fileName) {
+    fileName = "../test/output/" + fileName + ".txt";
+    FILE *file = fopen(fileName.c_str(), "w");
+
+    printf("Menyimpan hasil ke file %s\n", fileName.c_str());
+
+    if (!file) {
+        cerr << "Gagal membuat file.\n" << endl;
+        return;
+    }
+
+    fprintf(file, "%d\n", result.score);
+    for (int i = 0; i <= result.last; i++) {
+        fprintf(file, "%s ", matrix[result.sequenceResult[i].row][result.sequenceResult[i].col].c_str());
+    }
+    fprintf(file, "\n");
+
+    for (int i = 0; i <= result.last; i++) {
+        fprintf(file, "%d, %d\n", result.sequenceResult[i].row + 1, result.sequenceResult[i].col + 1);
+    }
+
+    fprintf(file, "\n");
+    fprintf(file, "%d ms\n", result.time);
+    fclose(file);
+    printf("Berhasil menyimpan hasil ke file %s\n\n", fileName.c_str());
+}
+
+void BreachProtocolSolver::showResult() {
+    if (result.last == -1) {
+        printf("Tidak ada hasil yang ditemukan.\n");
+        return;
+    } else {
+        printf("Hasil: \n");
+    }
+
+    printf("%d\n", result.score);
+    for (int i = 0; i <= result.last; i++) {
+        printf("%s ", matrix[result.sequenceResult[i].row][result.sequenceResult[i].col].c_str());
+    }
+    printf("\n");
+
+    for (int i = 0; i <= result.last; i++) {
+        printf("%d, %d\n", result.sequenceResult[i].row + 1, result.sequenceResult[i].col + 1);
+    }
+
+    printf("\n");
+    printf("%d ms\n\n", result.time);
+
+    char pilihan = 'N';
+
+    do
+    {
+       printf("Apakah akan menyimpan hasil? (Y/N): \n");
+    
+        cin >> pilihan;
+        if (pilihan == 'Y' || pilihan == 'y') {
+            string namaFile;
+            printf("Masukkan nama file: ");
+            cin >> namaFile;
+            writeResultToFile(namaFile);
+        } else if (pilihan != 'N' && pilihan != 'n') {
+            printf("Pilihan tidak valid.\n");
+            break;
+        }
+
+    } while (pilihan != 'Y' && pilihan != 'y' && pilihan != 'N' && pilihan != 'n');
+    
 }

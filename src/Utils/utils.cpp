@@ -15,7 +15,10 @@ vector<string> split(const string& s, char delimiter) {
 }
 
 void displayInput(int bufferSize, const vector<vector<string>>& matrix, const vector<Sequence>& sequences) {
-    cout << "Buffer Size: " << bufferSize << endl;
+    printf("Ukuran baris: %lu\n", matrix.size());
+    printf("Ukuran kolom: %lu\n", matrix[0].size());
+    cout << "Buffer Size: " << bufferSize << endl << endl;
+    
     cout << "Matrix: " << endl;
     for (const auto& row : matrix) {
         for (const auto& col : row) {
@@ -23,13 +26,15 @@ void displayInput(int bufferSize, const vector<vector<string>>& matrix, const ve
         }
         cout << endl;
     }
-    cout << "Sequences: " << endl;
+    cout << "\nSequences: " << endl;
     for (const auto& sequence : sequences) {
         for (const auto& data : sequence.data) {
             cout << data << " ";
         }
-        cout << "Value: " << sequence.value << endl;
+        cout << " -> Score: " << sequence.value << endl;
     }
+
+    printf("\n");
 }
 
 void makeMatrixFromToken(int row, int col, const vector<string>& token, vector<vector<string>>* matrix) {

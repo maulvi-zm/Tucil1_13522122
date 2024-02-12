@@ -31,6 +31,7 @@ int main(){
         cout << "0. Keluar\n" << endl;
         cout << "Pilihan: ";
         cin >> pilihan;
+        printf("\n");
 
         switch (pilihan)
         {
@@ -49,7 +50,6 @@ int main(){
 
             solver.Solve();
         
-            
             break;
 
         case 2:
@@ -87,6 +87,8 @@ int main(){
 
             displayInput(bufferSize, matrix, sequences);
         
+        case 0:
+            break;
         default:
             cout << "Pilihan tidak valid\n" << endl;
             break;
