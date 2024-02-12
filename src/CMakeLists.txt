@@ -15,7 +15,6 @@ set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 add_executable(BreachProtocolSolver
     ${SRC_DIR}/main.cpp
     ${SRC_DIR}/IO/io.cpp
-    ${SRC_DIR}/Data-Structure/data-structure.cpp
     ${SRC_DIR}/Solver/solver.cpp
     ${SRC_DIR}/Utils/utils.cpp
 )
