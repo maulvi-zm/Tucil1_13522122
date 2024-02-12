@@ -129,30 +129,6 @@ BreachProtocolSolver/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/build
 .PHONY : BreachProtocolSolver/fast
 
-Data-Structure/data-structure.o: Data-Structure/data-structure.cpp.o
-.PHONY : Data-Structure/data-structure.o
-
-# target to build an object file
-Data-Structure/data-structure.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Data-Structure/data-structure.cpp.o
-.PHONY : Data-Structure/data-structure.cpp.o
-
-Data-Structure/data-structure.i: Data-Structure/data-structure.cpp.i
-.PHONY : Data-Structure/data-structure.i
-
-# target to preprocess a source file
-Data-Structure/data-structure.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Data-Structure/data-structure.cpp.i
-.PHONY : Data-Structure/data-structure.cpp.i
-
-Data-Structure/data-structure.s: Data-Structure/data-structure.cpp.s
-.PHONY : Data-Structure/data-structure.s
-
-# target to generate assembly for a file
-Data-Structure/data-structure.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/Data-Structure/data-structure.cpp.s
-.PHONY : Data-Structure/data-structure.cpp.s
-
 IO/io.o: IO/io.cpp.o
 .PHONY : IO/io.o
 
@@ -258,9 +234,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... BreachProtocolSolver"
-	@echo "... Data-Structure/data-structure.o"
-	@echo "... Data-Structure/data-structure.i"
-	@echo "... Data-Structure/data-structure.s"
 	@echo "... IO/io.o"
 	@echo "... IO/io.i"
 	@echo "... IO/io.s"

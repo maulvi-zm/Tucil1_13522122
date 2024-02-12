@@ -4,12 +4,20 @@ using namespace std;
 
 BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<string> >& matrix, const vector<Sequence >& sequences)
     : bufferSize(bufferSize), matrix(matrix), sequences(sequences) {
+    maxScore = 0;
+    maxSequnceLength = 0;
+    minSequnceLength = 1000;
+
     for (int i = 0; i < sequences.size(); i++) {
         startOfSequences.insert(sequences[i].data[0]);
         maxScore += sequences[i].value;
 
         if (sequences[i].data.size() > maxSequnceLength) {
             maxSequnceLength = sequences[i].data.size();
+        }
+
+        if (sequences[i].data.size() < minSequnceLength) {
+            minSequnceLength = sequences[i].data.size();
         }
     }
 
@@ -27,8 +35,8 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
     result = {{}, 0, -1, 0};
 }
 
-void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
-    if (result.score == maxScore) {
+void BreachProtocolSolver::HorizontalMove(int bufferPointer, int maxPointer) {        
+    if (result.score == maxScore || bufferPointer > maxPointer + 1) {
         return;
     }
 
@@ -40,6 +48,7 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
     }
 
     if (bufferPointer <= bufferSize) {
+        
         int tempPointer;
 
         if (bufferPointer < bufferSize) {
@@ -50,13 +59,14 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
 
         array<int, 2> temp = CheckScore(tempPointer);
 
-        if (temp[0] >= result.score || (temp[0] == result.score && (temp[1] < result.last || result.last == -1))){
+        if (temp[0] > result.score || (temp[0] == result.score && (temp[1] < result.last || result.last == -1))){
             result.sequenceResult = sequenceString;
             result.score = temp[0];
             result.last = temp[1];
         }
+
         
-        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0) || result.score == maxScore) {
             return;
         }
     } 
@@ -72,14 +82,15 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
             continue;
         }
 
-        VerticalMove(bufferPointer + 1);
+        VerticalMove(bufferPointer + 1, maxPointer);
     }
 }
 
-void BreachProtocolSolver::VerticalMove(int bufferPointer) {
-    if (result.score == maxScore) {
+void BreachProtocolSolver::VerticalMove(int bufferPointer, int maxPointer) {
+    if (result.score == maxScore || bufferPointer > maxPointer + 1) {
         return;
     }
+
     int currentCol = 0;
     if (bufferPointer == 0) {
         currentCol = 0;
@@ -104,7 +115,7 @@ void BreachProtocolSolver::VerticalMove(int bufferPointer) {
             result.last = temp[1];
         }
         
-        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0) || result.score == maxScore) {
             return;
         }
     } 
@@ -120,16 +131,20 @@ void BreachProtocolSolver::VerticalMove(int bufferPointer) {
             continue;
         }
 
-        HorizontalMove(bufferPointer + 1);
+        HorizontalMove(bufferPointer + 1, maxPointer);
     }
 }
 
 void BreachProtocolSolver::Solve() {
-    int bufferPointer = 0;
-
     auto startTime = chrono::high_resolution_clock::now();
 
-    HorizontalMove(bufferPointer);
+    for (int i = minSequnceLength - 1; i < bufferSize; i++) {
+        if (result.score == maxScore) {
+            break;
+        }
+
+        HorizontalMove(0, i);
+    }
 
     auto endTime = chrono::high_resolution_clock::now();
     
@@ -277,7 +292,6 @@ void BreachProtocolSolver::showResult() {
             writeResultToFile(namaFile);
         } else if (pilihan != 'N' && pilihan != 'n') {
             printf("Pilihan tidak valid.\n");
-            break;
         }
 
     } while (pilihan != 'Y' && pilihan != 'y' && pilihan != 'N' && pilihan != 'n');

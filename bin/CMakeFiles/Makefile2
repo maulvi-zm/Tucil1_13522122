@@ -81,12 +81,12 @@ clean: CMakeFiles/BreachProtocolSolver.dir/clean
 CMakeFiles/BreachProtocolSolver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BreachProtocolSolver.dir/build.make CMakeFiles/BreachProtocolSolver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/maulvizm/Documents/GitHub/Tucil1_13522122/bin/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target BreachProtocolSolver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/maulvizm/Documents/GitHub/Tucil1_13522122/bin/CMakeFiles --progress-num=1,2,3,4,5 "Built target BreachProtocolSolver"
 .PHONY : CMakeFiles/BreachProtocolSolver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/BreachProtocolSolver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/maulvizm/Documents/GitHub/Tucil1_13522122/bin/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/maulvizm/Documents/GitHub/Tucil1_13522122/bin/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/BreachProtocolSolver.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/maulvizm/Documents/GitHub/Tucil1_13522122/bin/CMakeFiles 0
 .PHONY : CMakeFiles/BreachProtocolSolver.dir/rule

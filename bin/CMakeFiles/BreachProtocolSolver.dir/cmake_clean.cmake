@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "BreachProtocolSolver"
   "BreachProtocolSolver.pdb"
-  "CMakeFiles/BreachProtocolSolver.dir/Data-Structure/data-structure.cpp.o"
-  "CMakeFiles/BreachProtocolSolver.dir/Data-Structure/data-structure.cpp.o.d"
   "CMakeFiles/BreachProtocolSolver.dir/IO/io.cpp.o"
   "CMakeFiles/BreachProtocolSolver.dir/IO/io.cpp.o.d"
   "CMakeFiles/BreachProtocolSolver.dir/Solver/solver.cpp.o"

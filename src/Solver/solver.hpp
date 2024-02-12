@@ -33,7 +33,7 @@ struct Result {
  */
 class BreachProtocolSolver {
 private:
-    int bufferSize, matrixRow, matrixCol, maxScore, maxSequnceLength = 0;
+    int bufferSize, matrixRow, matrixCol, maxScore, maxSequnceLength, minSequnceLength;
 
     vector<vector<string>> matrix;
     vector<Sequence> sequences;
@@ -41,9 +41,9 @@ private:
     vector<Point> sequenceString;
     Result result;
 
-    void HorizontalMove(int bufferPointer);
+    void HorizontalMove(int bufferPointer, int maxPointer);
 
-    void VerticalMove(int bufferPointer);
+    void VerticalMove(int bufferPointer, int maxPointer);
 
     array<int, 2> CheckScore(int bufferPointer);
 
