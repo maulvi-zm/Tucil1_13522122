@@ -10,7 +10,7 @@ using namespace std;
 
 class BreachProtocolSolver {
 private:
-    int bufferSize;
+    int bufferSize,matrixRow, matrixCol;
     vector<vector<string>> matrix;
     vector<Sequence> sequences;
     set<string> startOfSequences;

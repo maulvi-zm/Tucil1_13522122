@@ -12,7 +12,7 @@ int main(){
     int bufferSize;
     vector<vector<string>> matrix;
     vector<Sequence> sequences;
-    BreachProtocolSolver solver(0, {}, {});
+    BreachProtocolSolver solver(0, {{}}, {});
     string namaFile;
 
     int jumlahToken, row, col, jumlahSequence, maksPanjangSequence;
@@ -23,7 +23,7 @@ int main(){
         matrix.clear();
         sequences.clear();
         token.clear();
-        solver = BreachProtocolSolver(0, {}, {});
+        solver = BreachProtocolSolver(0, {{}}, {});
 
         cout << "Masukkan tipe input:" << endl;
         cout << "1. Input dari file" << endl;
@@ -37,7 +37,7 @@ int main(){
         case 1:
             cout << "Masukkan nama file: ";
             // cin >> namaFile;
-            namaFile = "../test/test-2.txt";
+            namaFile = "../test/test-1.txt";
             
             while (readFile(namaFile, &bufferSize, &matrix, &sequences) == 1) {
                 cout << "Masukkan nama file: ";

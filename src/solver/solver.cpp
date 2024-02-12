@@ -11,14 +11,30 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
     for (int i = 0; i < bufferSize; i++) {
         sequenceString.push_back(Point(-1, -1));
     }
+
+    matrixRow = matrix.size();
+    matrixCol = matrix[0].size();
 }
 
 void BreachProtocolSolver::HorizontalMove(int bufferPointer, int row, int col) {
-    if (bufferPointer < 0) {
+    // printf("hor buff %d, row %d, col %d ", bufferPointer, row, col);
+
+    // for (int i = 0; i < sequenceString.size(); i++) {
+    //         printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
+    //     }
+    //     printf("\n");
+
+
+    if (row >= matrixRow || row < 0 || col < 0 || bufferPointer > bufferSize - 1) {
         return;
     }
 
-    if (col >= matrix[row].size()) {
+    if (bufferPointer < 0 || (col >= matrixCol && bufferPointer == 0)) {
+        return;
+    }
+
+    if (col >= matrixCol) {
+
         int LastCol = sequenceString[bufferPointer - 1].col;
 
         sequenceString[bufferPointer] = Point(-1, -1);
@@ -29,16 +45,23 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer, int row, int col) {
 
     }
 
-    if (CheckPoint(Point(row, col), sequenceString, bufferPointer)) {
-        HorizontalMove(bufferPointer, row, col + 1);
-    } else if (bufferPointer == bufferSize - 1) {
-        sequenceString[bufferPointer] = Point(row, col);
-        sequenceStringContainer.push_back(sequenceString);
+    // if (CheckPoint(Point(row, col), sequenceString, bufferPointer)) {
 
-        for (int i = 0; i < sequenceString.size(); i++) {
-            printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
-        }
-        printf("\n");
+    //     HorizontalMove(bufferPointer, row, col + 1);
+
+    // } else 
+    if (bufferPointer == bufferSize - 1) {
+        Point point= Point(0,0);
+        point.row = row;
+        point.col = col;
+
+        sequenceString[bufferPointer] = point;
+        // sequenceStringContainer.push_back(sequenceString);
+
+        // for (int i = 0; i < sequenceString.size(); i++) {
+        //     printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
+        // }
+        // printf("\n");
 
         HorizontalMove(bufferPointer, row, col + 1);
 
@@ -54,14 +77,31 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer, int row, int col) {
 }
 
 void BreachProtocolSolver::VerticalMove(int bufferPointer, int row, int col) {
-    if (bufferPointer < 0) {
+    // printf("ver buff %d, row %d, col %d ", bufferPointer, row, col);
+
+    // for (int i = 0; i < sequenceString.size(); i++) {
+    //         printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
+    //     }
+    //     printf("\n");
+
+    if (col >= matrixCol || row < 0 || col < 0 || bufferPointer > bufferSize - 1) {
         return;
     }
-    if (row >= matrix.size()) {
+
+    if (bufferPointer < 0 || (row >= matrixRow && bufferPointer == 0)) {
+        return;
+    }
+
+    if (row >= matrixRow) {
 
         int LastRow = sequenceString[bufferPointer - 1].row;
 
         sequenceString[bufferPointer] = Point(-1, -1);
+
+        // for (int i = 0; i < sequenceString.size(); i++) {
+        //     printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
+        // }
+        // printf("\n");
 
         HorizontalMove(bufferPointer - 1, LastRow, col + 1);
 
@@ -69,23 +109,24 @@ void BreachProtocolSolver::VerticalMove(int bufferPointer, int row, int col) {
 
     } 
 
-    if (CheckPoint(Point(row, col), sequenceString, bufferPointer)) {
-        // printf("masuk: %d %d || buffer %d ||", row, col, bufferPointer);
+    // if (CheckPoint(Point(row, col), sequenceString, bufferPointer)) {
+
+    //     VerticalMove(bufferPointer, row + 1, col);
+        
+    // } else 
+    
+    if (bufferPointer == bufferSize - 1) {
+        Point point= Point(0,0);
+        point.row = row;
+        point.col = col;
+
+        sequenceString[bufferPointer] = point;
+        // sequenceStringContainer.push_back(sequenceString);
+
         // for (int i = 0; i < sequenceString.size(); i++) {
         //     printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
         // }
         // printf("\n");
-
-        VerticalMove(bufferPointer, row + 1, col);
-        
-    } else if (bufferPointer == bufferSize - 1) {
-        sequenceString[bufferPointer] = Point(row, col);
-        sequenceStringContainer.push_back(sequenceString);
-
-        for (int i = 0; i < sequenceString.size(); i++) {
-            printf("<%d %d> ", sequenceString[i].row, sequenceString[i].col);
-        }
-        printf("\n");
 
         VerticalMove(bufferPointer, row + 1, col);
 
@@ -116,7 +157,7 @@ void BreachProtocolSolver::Solve() {
 }
 
 void BreachProtocolSolver::ShowMatrixAndSequence() {
-    for (int i = 0; i < matrix.size(); i++) {
+    for (int i = 0; i < matrixRow; i++) {
         for (int j = 0; j < matrix[i].size(); j++) {
             printf("%s ", matrix[i][j].c_str());
         }
