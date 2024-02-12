@@ -28,6 +28,10 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
 }
 
 void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
+    if (result.score == maxScore) {
+        return;
+    }
+
     int currentRow = 0;
     if (bufferPointer == 0) {
         currentRow = 0;
@@ -52,7 +56,7 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
             result.last = temp[1];
         }
         
-        if (bufferPointer >= bufferSize || temp[0] == maxScore || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
             return;
         }
     } 
@@ -73,6 +77,9 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer) {
 }
 
 void BreachProtocolSolver::VerticalMove(int bufferPointer) {
+    if (result.score == maxScore) {
+        return;
+    }
     int currentCol = 0;
     if (bufferPointer == 0) {
         currentCol = 0;
@@ -97,7 +104,7 @@ void BreachProtocolSolver::VerticalMove(int bufferPointer) {
             result.last = temp[1];
         }
         
-        if (bufferPointer >= bufferSize || temp[0] == maxScore || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
+        if (bufferPointer >= bufferSize || (bufferPointer >= maxSequnceLength + 1  && temp[0] == 0)) {
             return;
         }
     } 

@@ -9,6 +9,7 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
 
     if (!file) {
         cerr << "Gagal membuka file." << endl;
+        printf("Jika working directory saat ini adalah /bin, gunakan input \"../test/namaFile.txt\"\n\n");
         return 1;
     }
 
@@ -22,8 +23,6 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
     for (int i = 0; i < row; i++) {
         fgets(line, sizeof(line), file);
         vector<string> temp = split(line, ' ');
-
-        // printf("Ukuran kolom: %lu \n", temp.size());
 
         if (temp.size() != col) {
             
