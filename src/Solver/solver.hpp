@@ -3,10 +3,18 @@
 
 #include <vector>
 #include <string>
+#include <array>
 #include <set>
+#include <chrono>
 #include "../Data-Structure/data-structure.hpp"
 
 using namespace std;
+
+struct Result {
+    vector<Point> sequenceResult;
+    int score;
+    int last;
+};
 
 class BreachProtocolSolver {
 private:
@@ -16,12 +24,15 @@ private:
     set<string> startOfSequences;
     vector<Point> sequenceString;
     vector<vector<Point>> sequenceStringContainer;
+    Result result;
 
-    void HorizontalMove(int bufferPointer, int row, int col);
+    int score[2] = {0, 0};
 
-    void VerticalMove(int bufferPointer, int row, int col);
+    void HorizontalMove(int bufferPointer);
 
-    void CheckScore(vector<Point> sequenceString);
+    void VerticalMove(int bufferPointer);
+
+    array<int, 2> CheckScore();
 
     bool CheckPoint(Point point, vector<Point> sequenceString, int bufferPointer);
 
