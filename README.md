@@ -19,7 +19,7 @@ BreachProtocolSolver is a program designed to solve problems inspired by the bre
 This program is already compiled in MacOS arm-64 environment. If you are using the same environment, you can skip this step. If you are using another environmen, run the following command 
 
 ```bash
-  wsl 
+  wsl (For Windows User)
   
   cd bin
 
