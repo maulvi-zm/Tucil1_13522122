@@ -59,3 +59,12 @@ void makeSequenceFromToken(int jumlahSequence, int maksPanjangSequence, const ve
         sequences->push_back(Sequence(temp, (rand() % 10 + 1) * 10));
     }
 }
+
+bool CheckAlfaNumeric(const string& s) {
+    for (char c : s) {
+        if (!isalnum(c)) {
+            return false;
+        }
+    }
+    return true;
+}

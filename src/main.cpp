@@ -37,8 +37,8 @@ int main(){
         {
         case 1:
             cout << "Masukkan nama file: ";
-            // cin >> namaFile;
-            namaFile = "../test/test-1.txt";
+            cin >> namaFile;
+            // namaFile = "../test/test-1.txt";
             
             while (readFile(namaFile, &bufferSize, &matrix, &sequences) == 1) {
                 cout << "Masukkan nama file: ";
@@ -53,32 +53,38 @@ int main(){
             break;
 
         case 2:
+            cout << "Masukkan jumlah token: ";
             cin >> jumlahToken;
 
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+            cout << "Masukkan token: ";
             getline(cin, token_string, '\n');
-
             token = split(token_string, ' ');
 
-            if (token.size() != jumlahToken) {
-                cerr << "Jumlah token tidak sesuai" << endl;
-                continue;
+            while (token.size() != jumlahToken) {
+                cout << "Jumlah token tidak sesuai" << endl;
+                cout << "Masukkan token: ";
+                getline(cin, token_string, '\n');
+                token = split(token_string, ' ');
             }
 
             for (const string& s : token) {
-                if (s.size() != 2) {
-                    cerr << "Token harus memiliki panjang 2" << endl;
+                if (s.size() < 2) {
+                    cerr << "Token harus memiliki panjang minimal 2" << endl;
                     continue;
                 }
             }
-
+            cout << "Masukkan ukuran buffer: ";
             cin >> bufferSize;
-            cin >> row >> col;
+            cout << "Masukkan ukuran matriks (width height): ";
+            cin >> col >> row;
 
             makeMatrixFromToken(row, col, token, &matrix);
 
+            cout << "Masukkan jumlah sequence: ";
             cin >> jumlahSequence;
+            cout << "Masukkan maksimal panjang sequence: ";
             cin >> maksPanjangSequence;
 
             makeSequenceFromToken(jumlahSequence, maksPanjangSequence, token, &sequences);
@@ -86,6 +92,8 @@ int main(){
             solver = BreachProtocolSolver(bufferSize, matrix, sequences);
 
             displayInput(bufferSize, matrix, sequences);
+
+            solver.Solve();
         
         case 0:
             break;

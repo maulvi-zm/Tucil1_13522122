@@ -3,5 +3,6 @@
         "vector": "cpp",
         "array": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src"
 }

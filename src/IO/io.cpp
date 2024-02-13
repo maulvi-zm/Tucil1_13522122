@@ -18,7 +18,7 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
     *bufferSize = stoi(fgets(line, sizeof(line), file));
 
     int row, col;
-    fscanf(file, "%d %d\n", &row, &col);
+    fscanf(file, "%d %d\n", &col, &row);
 
     for (int i = 0; i < row; i++) {
         fgets(line, sizeof(line), file);
@@ -31,15 +31,19 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
         }
 
         for (int j = 0; j < col; j++) {
-            if (temp[j].size() != 2) {
-                int len = strlen(temp[j].c_str());
+            int len = strlen(temp[j].c_str());
 
-                if (temp[j][len - 1] == '\n' && len == 3) {
-                    temp[j].erase(len - 1);
-                    continue;
-                }
+            if (temp[j][len - 1] == '\n') {
+                temp[j].erase(len - 1);
+            }
 
-                cerr << "Token dalam matriks harus memiliki panjang 2" << endl;
+            if (!CheckAlfaNumeric(temp[j])) {
+                cerr << "Token dalam matriks harus berupa alfanumerik" << endl;
+                return 1;
+            }
+
+            if (temp[j].size() < 2) {
+                cerr << "Token dalam matriks harus memiliki panjang >= 2" << endl;
                 return 1;
             }
         }
@@ -54,16 +58,19 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
         vector<string> temp = split(fgets(line, sizeof(line), file), ' ');
 
         for (int j = 0; j < temp.size(); j++) {
-            if (temp[j].size() != 2) {
-                
-                int len = strlen(temp[j].c_str());
+            int len = strlen(temp[j].c_str());
 
-                if (temp[j][len - 1] == '\n' && len == 3) {
-                    temp[j].erase(len - 1);
-                    continue;
-                }
+            if (temp[j][len - 1] == '\n') {
+                temp[j].erase(len - 1);
+            }
 
-                cerr << "Token dalam sequence harus memiliki panjang 2" << endl;
+            if (!CheckAlfaNumeric(temp[j])) {
+                cerr << "Token dalam sequence harus berupa alfanumerik" << endl;
+                return 1;
+            }
+
+            if (temp[j].size() < 2) {
+                cerr << "Token dalam sequence harus memiliki panjang >= 2" << endl;
                 return 1;
             }
         }

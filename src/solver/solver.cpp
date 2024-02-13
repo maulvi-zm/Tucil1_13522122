@@ -35,7 +35,12 @@ BreachProtocolSolver::BreachProtocolSolver(int bufferSize, const vector<vector<s
     result = {{}, 0, -1, 0};
 }
 
-void BreachProtocolSolver::HorizontalMove(int bufferPointer, int maxPointer) {        
+void BreachProtocolSolver::HorizontalMove(int bufferPointer, int maxPointer) {
+    // for (int i = 0; i < sequenceString.size(); i++) {
+    //     printf("(%d, %d)", sequenceString[i].row, sequenceString[i].col);
+    // }
+    // printf("\n");
+
     if (result.score == maxScore || bufferPointer > maxPointer + 1) {
         return;
     }
@@ -87,6 +92,11 @@ void BreachProtocolSolver::HorizontalMove(int bufferPointer, int maxPointer) {
 }
 
 void BreachProtocolSolver::VerticalMove(int bufferPointer, int maxPointer) {
+    // for (int i = 0; i < sequenceString.size(); i++) {
+    //     printf("(%d, %d)", sequenceString[i].row, sequenceString[i].col);
+    // }
+    // printf("\n");
+
     if (result.score == maxScore || bufferPointer > maxPointer + 1) {
         return;
     }
@@ -142,7 +152,7 @@ void BreachProtocolSolver::Solve() {
         if (result.score == maxScore) {
             break;
         }
-
+        sequenceString[0] = Point(0, 0);
         HorizontalMove(0, i);
     }
 
@@ -199,20 +209,25 @@ array<int, 2> BreachProtocolSolver::CheckScore(int bufferPointer) {
         }
 
         bool isMatch;
-        int LastPointer;
+        int LastPointer = 0;
         for (int j = 0; j <= bufferPointer + 1 - sequences[i].data.size(); j++) {
 
             isMatch = true;
             
             int k = 0;
-            int LastPointer = j;
+            LastPointer = j;
 
             while (k < sequences[i].data.size()) {
-                // printf("%d %s %s %d \n", i, sequences[i].data[k].c_str(), matrix[sequenceString[LastPointer].row][sequenceString[LastPointer].col].c_str(), LastPointer);
+                if (sequenceString[LastPointer].row == -1) {
+                    isMatch = false;
+                    break;
+                }
+
                 if (sequences[i].data[k] != matrix[sequenceString[LastPointer].row][sequenceString[LastPointer].col]) {
                     isMatch = false;
                     break;
                 }
+
                 k++;
                 LastPointer++;
             }
@@ -259,7 +274,7 @@ void BreachProtocolSolver::writeResultToFile(string fileName) {
 
 void BreachProtocolSolver::showResult() {
     if (result.last == -1) {
-        printf("Tidak ada hasil yang ditemukan.\n");
+        printf("Tidak ada hasil yang ditemukan atau hasil terbaik adalah score 0 dengan tidak bergerak.\n");
         return;
     } else {
         printf("Hasil: \n");

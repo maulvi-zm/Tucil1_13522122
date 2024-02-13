@@ -54,4 +54,15 @@ void makeMatrixFromToken(int row, int col, const vector<string>& token, vector<v
  */
 void makeSequenceFromToken(int jumlahSequence, int maksPanjangSequence, const vector<string>& token, vector<Sequence> *sequences);
 
+/**
+ * @brief Checks if a string is alphanumeric.
+ * 
+ * This function takes a string as input and checks if it contains only alphanumeric characters.
+ * Alphanumeric characters include uppercase and lowercase letters (A-Z, a-z) and digits (0-9).
+ * 
+ * @param s The string to be checked.
+ * @return True if the string is alphanumeric, false otherwise.
+ */
+bool CheckAlfaNumeric(const string& s);
+
 #endif // UTILS_HPP
