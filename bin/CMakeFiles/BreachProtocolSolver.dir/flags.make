@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/IO -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Data-Structure -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Solver -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Utils
+CXX_INCLUDES = -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Data-Structure -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/IO -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Solver -I/Users/maulvizm/Documents/GitHub/Tucil1_13522122/src/Utils
 
 CXX_FLAGSarm64 = -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk
 

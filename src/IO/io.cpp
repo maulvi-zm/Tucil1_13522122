@@ -37,14 +37,13 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
                 temp[j].erase(len - 1);
             }
 
+            len = strlen(temp[j].c_str());
+
             if (temp[j][len - 1] == '\r') {
                 temp[j].erase(len - 1);
             }
 
             if (!CheckAlfaNumeric(temp[j])) {
-                for (int i = 0; i < temp[j].size(); i++) {
-                    printf("%d ", temp[j][i]);
-                }
                 cerr << "Token dalam matriks harus berupa alfanumerik" << endl;
                 return 1;
             }
@@ -71,14 +70,12 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
                 temp[j].erase(len - 1);
             }
 
+            len = strlen(temp[j].c_str());
             if (temp[j][len - 1] == '\r') {
                 temp[j].erase(len - 1);
             }
 
             if (!CheckAlfaNumeric(temp[j])) {
-                for (int i = 0; i < temp[j].size(); i++) {
-                    printf("%d ", temp[j][i]);
-                }
                 cerr << "Token dalam sequence harus berupa alfanumerik" << endl;
                 return 1;
             }
