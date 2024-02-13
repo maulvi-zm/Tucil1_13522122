@@ -265,8 +265,8 @@ void BreachProtocolSolver::writeResultToFile(string fileName) {
     for (int i = 0; i <= result.last; i++) {
         fprintf(file, "%d, %d\n", result.sequenceResult[i].row + 1, result.sequenceResult[i].col + 1);
     }
-
     fprintf(file, "\n");
+    
     fprintf(file, "%d ms\n", result.time);
     fclose(file);
     printf("Berhasil menyimpan hasil ke file %s\n\n", fileName.c_str());
