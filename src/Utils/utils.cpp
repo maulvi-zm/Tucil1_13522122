@@ -50,7 +50,7 @@ void makeMatrixFromToken(int row, int col, const vector<string>& token, vector<v
 void makeSequenceFromToken(int jumlahSequence, int maksPanjangSequence, const vector<string>& token, vector<Sequence> *sequences){
     for (int i = 0; i < jumlahSequence; i++) {
 
-        int panjang = rand() % maksPanjangSequence + 1;
+        int panjang = rand() % (maksPanjangSequence - 1) + 2;
 
         vector<string> temp;
         for (int j = 0; j < panjang; j++) {

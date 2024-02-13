@@ -21,6 +21,8 @@ This program is already compiled in MacOS arm-64 environment. If you are using t
 ```bash
   cd bin
 
+  rm CMakeCache.txt
+
   cmake ../src
   
   make

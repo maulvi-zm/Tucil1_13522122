@@ -37,6 +37,10 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
                 temp[j].erase(len - 1);
             }
 
+            if (temp[j][len - 1] == '\r') {
+                temp[j].erase(len - 1);
+            }
+
             if (!CheckAlfaNumeric(temp[j])) {
                 cerr << "Token dalam matriks harus berupa alfanumerik" << endl;
                 return 1;
@@ -61,6 +65,10 @@ int readFile(const string namaFile, int *bufferSize, vector<vector<string>> *mat
             int len = strlen(temp[j].c_str());
 
             if (temp[j][len - 1] == '\n') {
+                temp[j].erase(len - 1);
+            }
+            
+            if (temp[j][len - 1] == '\r') {
                 temp[j].erase(len - 1);
             }
 
