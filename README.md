@@ -16,9 +16,11 @@ BreachProtocolSolver is a program designed to solve problems inspired by the bre
 
 ## How to compile
 
-This program is already compiled in MacOS arm-64 environment. If you are using the same environment, you can skip this step. If you are using another environmen, run the following command
+This program is already compiled in MacOS arm-64 environment. If you are using the same environment, you can skip this step. If you are using another environmen, run the following command 
 
 ```bash
+  wsl 
+  
   cd bin
 
   rm CMakeCache.txt
