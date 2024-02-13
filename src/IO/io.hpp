@@ -3,6 +3,7 @@
 
 #include "../Data-Structure/data-structure.hpp"
 #include "../Utils/utils.hpp"
+#include <cstring>
 #include <fstream>
 
 using namespace std;
